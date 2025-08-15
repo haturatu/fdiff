@@ -14,6 +14,7 @@
 #include <sys/time.h>
 #include <inttypes.h>
 #include <bsd/string.h>
+#include <bsd/err.h>      /* err, errx, errc, verr, verrx, verrc */
 
 #include "ignore.h"
 #include "store.h"
@@ -35,7 +36,6 @@ static size_t next_capacity(size_t cur) {
     if (cur == 0) return 256;
     return cur * 2;
 }
-
 
 static int compute_file_hash(const char *path, uint64_t *out_hash, uint64_t *out_size) {
     int fd = open(path, O_RDONLY | O_CLOEXEC);
@@ -285,14 +285,12 @@ static int cmd_init(void) {
         return EXIT_ALREADY_INITIALIZED;
     }
     if (mkdir(INDEX_DIR, 0755) < 0) {
-        perror("mkdir");
-        return EXIT_FAIL;
+        err(EXIT_FAIL, "mkdir");
     }
 
     
     if (store_save(INDEX_FILE, NULL, 0) != 0) {
-        fprintf(stderr, "Failed to create index file.\n");
-        return EXIT_FAIL;
+        errx(EXIT_FAIL, "Failed to create index file");
     }
 
     
