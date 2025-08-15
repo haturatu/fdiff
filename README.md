@@ -1,6 +1,36 @@
+# fdiff
 A simple file difference tracker. It helps you track changes in your files by maintaining an index of file hashes.  
 Extracts only Git’s diff detection functionality, and can be faster than Git in some cases.  
 Since it processes asynchronously, daemonization is not required, making it a good choice if you prefer not to use tools like `inotifywait`.  
+
+## Features
+As shown below, each execution is assigned a status code, allowing flexible branching in shell scripts.
+
+```
+#define EXIT_OK 0
+#define EXIT_FAIL 1
+#define EXIT_NOFILE 3
+#define EXIT_INTERNAL 4
+#define EXIT_ALREADY_INITIALIZED 5
+#define EXIT_ALREADY_ADDED 6
+#define EXIT_DIFF_FOUND 7
+```
+
+example usage:
+```bash
+$ echo $?
+0
+$ fdiff init
+Already initialized.
+$ echo $?
+5
+$ fdiff add .
+$ echo $?
+0
+$ fdiff add .
+$ echo $?
+6
+```
 
 ## Installation
 
