@@ -4,6 +4,14 @@ Extracts only Git’s diff detection functionality, and can be faster than Git i
 Since it processes asynchronously, daemonization is not required, making it a good choice if you prefer not to use tools like `inotifywait`.  
 
 ## Features
+- **Fast**: Uses file hashes to quickly determine changes.
+- **Simple**: Easy to use with a straightforward command-line interface.
+- **No Daemon**: Operates without needing a background service, making it lightweight.
+- **Status Codes**: Provides clear exit codes for script integration.
+- **Use strlcpy/strlcat**: Ensures safe string operations to prevent buffer overflows.
+  
+Thanks to OpenBSD for the `strlcpy` and `strlcat` functions, which are used to safely copy and concatenate strings, preventing buffer overflows.  
+
 As shown below, each execution is assigned a status code, allowing flexible branching in shell scripts.
 
 ```
