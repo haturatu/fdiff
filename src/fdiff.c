@@ -63,7 +63,7 @@ static int compute_file_hash(const char *path, uint64_t *out_hash, uint64_t *out
     const uint64_t FNV_PRIME  = 1099511628211ULL;
     uint64_t h = FNV_OFFSET;
 
-    const size_t BUF_SZ = 64 * 1024;
+    const size_t BUF_SZ = 1024;
     unsigned char *buf = malloc(BUF_SZ);
     if (!buf) {
         close(fd);
@@ -310,7 +310,7 @@ static int cmd_init(void) {
         fclose(f);
     }
 
-    printf("Initialized empty fdiff repo\n");
+    printf("Initialized empty fdiff\n");
     return EXIT_OK;
 }
 
@@ -518,7 +518,7 @@ static int cmd_status(void) {
 static void print_help(void) {
     printf("fdiff - simple file difference tracker\n\n");
     printf("Usage:\n");
-    printf("  fdiff init             Initialize a new fdiff repository\n");
+    printf("  fdiff init             Initialize a new fdiff\n");
     printf("  fdiff add <path>...    Add file(s) or directories to tracking\n");
     printf("  fdiff status           Show status of tracked vs current files\n");
     printf("  fdiff help             Show this help message\n\n");
