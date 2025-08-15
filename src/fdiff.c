@@ -17,7 +17,6 @@
 
 #include "ignore.h"
 #include "store.h"
-#include "murmurhash.h"
 
 #define INDEX_DIR ".fdiff"
 #define INDEX_FILE ".fdiff/index.bin"
