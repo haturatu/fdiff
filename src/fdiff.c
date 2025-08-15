@@ -430,7 +430,7 @@ static int cmd_add(int argc, char *argv[]) {
 static int cmd_status(void) {
     struct stat st;
     if (stat(INDEX_FILE, &st) != 0) {
-        fprintf(stderr, "Nnot initialized.\n");
+        fprintf(stderr, "Not initialized.\n");
         return EXIT_FAIL;
     }
 
